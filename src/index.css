@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme {
+  --color-azul: #023e68;
+  --color-azul-dark: #012a47;
+  --color-magenta: #ea2282;
+  --color-magenta-dark: #c9166d;
+  --font-sans: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+}
+
+body { @apply bg-white text-slate-800 antialiased; }
+
+.inp { @apply w-full rounded-md border border-slate-300 bg-white px-2.5 py-1.5 text-sm outline-none focus:border-azul focus:ring-2 focus:ring-azul/15; }
+@utility btn { @apply inline-flex items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-50; }
+.btn-primary { @apply btn bg-azul text-white hover:bg-azul-dark; }
+.btn-accent { @apply btn bg-magenta text-white hover:bg-magenta-dark; }
+.btn-ghost { @apply btn border border-slate-300 bg-white text-slate-700 hover:bg-slate-50; }
+.tbl { @apply w-full text-sm; }
+.tbl th { @apply bg-slate-50 px-3 py-2 text-left text-xs font-semibold uppercase tracking-wide text-slate-500 whitespace-nowrap; }
+.tbl td { @apply border-t border-slate-100 px-3 py-2 whitespace-nowrap; }
+.num { @apply text-right tabular-nums; }
+
+/* Impresión: solo se imprime el bloque .print-area (reportes y recibos) */
+@media print {
+  @page { margin: 12mm; }
+  body { background: white !important; }
+  body * { visibility: hidden; }
+  .print-area, .print-area * { visibility: visible; }
+  .print-area { position: absolute; left: 0; top: 0; width: 100%; border: 0 !important; box-shadow: none !important; }
+  .print-area .overflow-auto, .print-area .overflow-x-auto { max-height: none !important; overflow: visible !important; }
+  .no-print { display: none !important; }
+  .tbl td, .tbl th { padding: 3px 6px; font-size: 10px; }
+}
